@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATIF SAFFRUDDIN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background-image: url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=1920&blur=50');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dark-mode { background-color: #0f172a; color: #f8fafc; }
+        .light-mode { background-color: #f8fafc; color: #0f172a; }
+        
+        .gold-text { color: #d4af37; }
+        .gold-border { border-color: #d4af37; }
+    </style>
+</head>
+<body class="dark-mode transition-colors duration-500">
+
+    <div class="min-h-screen flex items-center justify-center p-6">
+        <div class="container max-w-sm glass rounded-3xl p-8 text-center shadow-2xl">
+            
+            <!-- Settings Bar -->
+            <div class="flex justify-between mb-8">
+                <button onclick="toggleLang()" class="text-xs px-3 py-1 rounded-full border border-current hover:bg-white/10 transition">ID / EN</button>
+                <button onclick="toggleTheme()" class="text-xs px-3 py-1 rounded-full border border-current hover:bg-white/10 transition">
+                    <i class="fas fa-adjust"></i>
+                </button>
+            </div>
+
+            <h1 id="title" class="font-serif text-3xl mb-2 font-bold">LATIF SAFFRUDDIN</h1>
+            <p id="tagline" class="gold-text italic mb-8 text-sm">"Bukan sekadar memperkenalkan diri, tetapi memperkenalkan nilai yang saya perjuangkan."</p>
+
+            <div class="flex flex-col gap-3">
+                <a href="https://api.whatsapp.com/send?phone=628551236277&text=" target="_blank" class="glass p-4 rounded-xl border border-white/10 hover:border-gold-500 transition flex items-center justify-center gap-3">
+                    <i class="fab fa-whatsapp gold-text"></i> <span data-i18n="wa">Hubungi via WhatsApp</span>
+                </a>
+                <a href="https://www.facebook.com/ptwebdigitalmarketing?locale=id_ID" target="_blank" class="glass p-4 rounded-xl border border-white/10 hover:border-gold-500 transition flex items-center justify-center gap-3">
+                    <i class="fab fa-facebook gold-text"></i> <span data-i18n="fb">Facebook</span>
+                </a>
+                <a href="https://linktr.ee/notoatiresikiati" target="_blank" class="glass p-4 rounded-xl border border-white/10 hover:border-gold-500 transition flex items-center justify-center gap-3">
+                    <i class="fas fa-user gold-text"></i> <span data-i18n="about">Tentang Aku</span>
+                </a>
+                <a href="https://lynk.id/latifsafruddin" target="_blank" class="glass p-4 rounded-xl border border-white/10 hover:border-gold-500 transition flex items-center justify-center gap-3">
+                    <i class="fas fa-link gold-text"></i> <span data-i18n="visit">Kunjungi Aku</span>
+                </a>
+                <a href="https://taplink.cc/latifsafruddin" target="_blank" class="glass p-4 rounded-xl border border-white/10 hover:border-gold-500 transition flex items-center justify-center gap-3">
+                    <i class="fas fa-globe gold-text"></i> <span data-i18n="portofolio">Kunjungi Portofolio</span>
+                </a>
+                <button onclick="copyEmail()" class="glass p-4 rounded-xl border border-white/10 hover:border-gold-500 transition flex items-center justify-center gap-3 w-full">
+                    <i class="fas fa-envelope gold-text"></i> <span data-i18n="email">Kirim Email</span>
+                </button>
+            </div>
+
+            <p class="mt-12 text-[10px] opacity-50 uppercase tracking-widest">&copy; 2026 Latif Saffruddin</p>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            id: {
+                tagline: '"Bukan sekadar memperkenalkan diri, tetapi memperkenalkan nilai yang saya perjuangkan."',
+                wa: "Hubungi via WhatsApp",
+                fb: "Facebook",
+                about: "Tentang Aku",
+                visit: "Kunjungi Aku",
+                portofolio: "Kunjungi Portofolio",
+                email: "Kirim Email"
+            },
+            en: {
+                tagline: '"Not just introducing myself, but introducing the values I fight for."',
+                wa: "Contact via WhatsApp",
+                fb: "Facebook",
+                about: "About Me",
+                visit: "Visit Me",
+                portofolio: "Visit Portfolio",
+                email: "Send Email"
+            }
+        };
+
+        let lang = 'id';
+        function toggleLang() {
+            lang = lang === 'id' ? 'en' : 'id';
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerText = translations[lang][key];
+            });
+            document.getElementById('tagline').innerText = translations[lang].tagline;
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+        }
+
+        function copyEmail() {
+            const email = "latifsafruddin2222@gmail.com";
+            const textArea = document.createElement("textarea");
+            textArea.value = email;
+            // Ensure element is hidden but selectable
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                const msg = document.createElement('div');
+                msg.className = "fixed bottom-5 left-1/2 -translate-x-1/2 bg-black/90 text-white px-6 py-3 rounded-full shadow-lg text-sm z-50";
+                msg.innerText = lang === 'id' ? "Email berhasil disalin!" : "Email copied!";
+                document.body.appendChild(msg);
+                setTimeout(() => msg.remove(), 2000);
+            } catch (err) {
+                console.error('Fallback copy failed', err);
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
